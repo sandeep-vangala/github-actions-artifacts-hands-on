@@ -18,3 +18,17 @@ jobs:
       with:
         name: hello-artifact
         path: hello.txt
+
+  download:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: download the file from previous job
+      uses: actions/download-artifact@v5
+      with:
+        name: hello-artifact
+        path: ./artifacts
+
+    - name: Display the content of downloaded files
+      run: cat ./artifcats/hello-artifact
